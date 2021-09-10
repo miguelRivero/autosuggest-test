@@ -2,10 +2,10 @@
 
 This is a test made with [Svelte](https://svelte.dev). It lives at https://github.com/sveltejs/template.
 
-To create a new project based on this template using [degit](https://github.com/Rich-Harris/degit):
+To create a new project type in terminal:
 
 ```bash
-npx degit sveltejs/template autosuggest-test
+git clone git@github.com:miguelRivero/autosuggest-test.git
 cd autosuggest-test
 ```
 
@@ -17,7 +17,6 @@ cd autosuggest-test
 Install the dependencies...
 
 ```bash
-cd autosuggest-test
 npm install
 ```
 
