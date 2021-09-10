@@ -9,7 +9,7 @@
 
     let parsedMessage = "nothing yet";
 
-    function handleMessage() {
+    const handleMessage = () => {
         if (parsedMessage == undefined) return
         alert('You said ' + parsedMessage + '!')
     }

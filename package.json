@@ -13,7 +13,7 @@
     "@babel/preset-env": "^7.15.4",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
-    "@rollup/plugin-typescript": "^8.2.5",
+    "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/svelte": "^3.0.3",
     "babel-jest": "^27.1.0",
     "jest": "^26.4.2",
@@ -21,6 +21,7 @@
     "postcss": "^8.3.6",
     "postcss-load-config": "^3.1.0",
     "rollup": "^2.3.4",
+    "rollup-plugin-babel": "^4.4.0",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
     "rollup-plugin-svelte": "^7.0.0",
@@ -30,10 +31,10 @@
     "svelte-preprocess": "^4.9.0"
   },
   "dependencies": {
-    "@testing-library/jest-dom": "^5.14.1",
     "@types/jest": "^27.0.1",
     "@types/styled-components": "^5.1.14",
     "autoprefixer": "^10.3.4",
+    "core-js": "^3.6.5",
     "normalize.css": "^8.0.1",
     "postcss-cli": "^8.3.1",
     "sirv-cli": "^1.0.0",

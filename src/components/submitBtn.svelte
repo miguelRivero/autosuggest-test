@@ -4,7 +4,8 @@
     const dispatch = createEventDispatcher();
     export let text;
 
-    function handleClick() {
+    const handleClick = (e) => {
+        e.preventDefault();
         dispatch('message');
     }
 </script>

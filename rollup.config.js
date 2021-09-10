@@ -5,7 +5,7 @@ import livereload from 'rollup-plugin-livereload';
 import {terser} from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import { scss, postcss } from 'svelte-preprocess';
-// import sveltePreprocess from 'svelte-preprocess';
+import babel from 'rollup-plugin-babel';
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -76,6 +76,22 @@ export default {
         // browser on changes when not in production
         !production && livereload('public'),
 
+        babel({
+            extensions: ['.js', '.mjs', '.html', '.svelte'],
+            exclude: [ 'node_modules/@babel/**', 'node_modules/core-js/**' ],
+            /*runtimeHelpers: true,*/
+            presets: [
+                [
+                    '@babel/preset-env',
+                    {
+                        targets: 'ie 11',
+                        loose: true,
+                        useBuiltIns: 'entry',
+                        corejs: 3,
+                    }
+                ]
+            ]
+        }),
         // If we're building for production (npm run build
         // instead of npm run dev), minify
         production && terser()

@@ -8,6 +8,7 @@
         mentionsMessageEl;
 
     onMount(() => {
+        if (!values.length) return
         let tributeTriggers = new Tribute({
             trigger: "#",
             menuContainer: document.getElementById("mention-container"),
@@ -24,9 +25,6 @@
                 }
                 return
                 '#' + item.original.value
-            },
-            menuItemTemplate: function (item) {
-                return item.string;
             }
         });
 
@@ -44,15 +42,23 @@
         //for debounce
         timer = setTimeout(() => {
             parsedMessage = getMessage()
-        }, 500);
+        }, 300);
 
     }
 
+    const escapeRegExp = (string) => {
+        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+    }
+
+    const replaceAll = (str, match, replacement) => {
+        return str.replace(new RegExp(escapeRegExp(match), 'g'), ()=>replacement);
+    }
+
     const getMessage = () => {
-        return mentionsMessageEl.innerHTML
-            .replaceAll('<span contenteditable="false"><a>', '')
-            .replaceAll('</a></span>', '')
-            .replaceAll("&nbsp;", " ")
+        let step1 = replaceAll(mentionsMessageEl.innerHTML, '<span contenteditable="false"><a>', '');
+        let step2 = replaceAll(step1, '</a></span>', '');
+        let step3 = replaceAll(step2, '&nbsp;', ' ');
+        return step3
     }
 </script>
 
@@ -76,7 +82,6 @@
     font-size: 1em;
     outline: none;
     width: 100%;
-    min-width: 264px;
     min-height: 107px;
     text-align: left;
 
@@ -123,15 +128,5 @@
 
   :global(.tribute-container > ul li.highlight) {
     background-color: rgb(247, 249, 249);
-  }
-
-  @media (min-width: 640px) {
-    //.msg-container__text {
-    //  width: calc(100% - 60px);
-    //
-    //}
-    //#mentionsMessage {
-    //  width: 100%;
-    //}
   }
 </style>
