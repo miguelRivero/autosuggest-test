@@ -20,8 +20,12 @@
     <h1>USA cities Autosuggest box</h1>
 
     <p class="mention-description">
-        Please type something about the USA cities you have visited or want to visit sometime. <br>
-        <strong>Important: </strong> Use <strong>#</strong> symbol before the name of the city
+        Please type something about the USA cities you have visited or want to visit sometime. <br><br>
+        <strong>Important:</strong> <br>
+        <small>
+        - Use <strong>#</strong> symbol before the name of the city <br>
+            - To add new values, sometimes it's necessary to press (sometimes double press) the <strong>ENTER</strong> key.
+        </small>
     </p>
 
     <section id="mention-container">
