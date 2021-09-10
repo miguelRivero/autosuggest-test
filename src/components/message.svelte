@@ -5,11 +5,13 @@
     export let values, parsedMessage;
 
     let timer,
-        mentionsMessageEl;
+        mentionsMessageEl,
+        newMention,
+        tributeTriggers;
 
     onMount(() => {
         if (!values.length) return
-        let tributeTriggers = new Tribute({
+        tributeTriggers = new Tribute({
             trigger: "#",
             menuContainer: document.getElementById("mention-container"),
             noMatchTemplate: "No results",
@@ -35,30 +37,46 @@
             .addEventListener("tribute-replaced", function(e) {
                 parsedMessage = getMessage()
             });
+
+        document
+            .getElementById("mentionsMessage")
+            .addEventListener("tribute-no-match", function(e) {
+                newMention = getMentions(e.target.innerText)
+            });
     });
 
-    const handleKeyup = () => {
+    const getMentions = (str) => {
+        let mentions = str.split(/[#," "]/);
+        return mentions[mentions.length - 1];
+    }
+
+    const handleKeyup = e => {
         clearTimeout(timer);
         //for debounce
         timer = setTimeout(() => {
             parsedMessage = getMessage()
         }, 300);
-
+        if (e.charCode === 13) onAddToList();
     }
 
-    const escapeRegExp = (string) => {
-        return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
-    }
+    const onAddToList = () => {
+        if (!newMention) return
+        let newVal = { key: newMention, value: newMention };
+        values.push(newVal)
+        values = values.sort((a,b) => a.key > b.key ? 1 : -1)
+        reformatText(newMention)
+    };
 
-    const replaceAll = (str, match, replacement) => {
-        return str.replace(new RegExp(escapeRegExp(match), 'g'), ()=>replacement);
+    const reformatText = (mention) => {
+        let newHtml = mentionsMessageEl.innerHTML.toString().replace(`#${mention}`, `<span contenteditable="false"><a>#${mention}</a></span>`)
+        mentionsMessageEl.innerHTML = newHtml;
     }
+    const onKeyPress = e => {
+        if (e.charCode === 13) onAddToList();
+    };
 
     const getMessage = () => {
-        let step1 = replaceAll(mentionsMessageEl.innerHTML, '<span contenteditable="false"><a>', '');
-        let step2 = replaceAll(step1, '</a></span>', '');
-        let step3 = replaceAll(step2, '&nbsp;', ' ');
-        return step3
+        return mentionsMessageEl.innerText
     }
 </script>
 
@@ -66,6 +84,7 @@
     <div contenteditable="true"
          id="mentionsMessage"
          bind:this="{mentionsMessageEl}"
+         on:keypress={onKeyPress}
          on:keyup|preventDefault={handleKeyup}
     ></div>
 </div>
