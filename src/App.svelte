@@ -17,14 +17,14 @@
 
 <Normalize/>
 <main>
-    <h1>USA cities Autosuggest box</h1>
+    <h1>Diagnosis Autosuggest Box</h1>
 
     <p class="mention-description">
-        Please type something about the USA cities you have visited or want to visit sometime. <br><br>
+        Please please write the patient's diagnosis.<br><br>
         <strong>Important:</strong> <br>
         <small>
-        - Use <strong>#</strong> symbol before the name of the city <br>
-            - To add new values, sometimes it's necessary to press (sometimes double press) the <strong>ENTER</strong> key.
+            You can access the tags by starting the word with <strong>#</strong>. <br>
+            Similarly, you can add new tags by typing <strong>#</strong> plus the tag and pressing ENTER (sometimes you need to do it twice).
         </small>
     </p>
 
